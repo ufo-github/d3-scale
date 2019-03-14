@@ -18,7 +18,7 @@ For a longer introduction, see these recommended tutorials:
 
 * [d3: scales, and color.](http://www.jeromecukier.net/2011/08/11/d3-scales-and-color/) by Jérôme Cukier
 
-## Installing
+## 安装
 
 If you use NPM, `npm install d3-scale`. Otherwise, download the [latest release](https://github.com/d3/d3-scale/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-scale.v2.min.js) or as part of [D3](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
@@ -40,7 +40,7 @@ var x = d3.scaleLinear();
 
 (You can omit d3-time and d3-time-format if you’re not using [d3.scaleTime](#scaleTime) or [d3.scaleUtc](#scaleUtc).)
 
-## API Reference
+## API 参考
 
 * [Continuous](#continuous-scales) ([Linear](#linear-scales), [Power](#power-scales), [Log](#log-scales), [Identity](#identity-scales), [Time](#time-scales))
 * [Sequential](#sequential-scales)
@@ -50,7 +50,7 @@ var x = d3.scaleLinear();
 * [Threshold](#threshold-scales)
 * [Ordinal](#ordinal-scales) ([Band](#band-scales), [Point](#point-scales))
 
-### Continuous Scales
+### 连续性缩放(Continuous Scales)
 
 Continuous scales map a continuous, quantitative input [domain](#continuous_domain) to a continuous output [range](#continuous_range). If the range is also numeric, the mapping may be [inverted](#continuous_invert). A continuous scale is not constructed directly; instead, try a [linear](#linear-scales), [power](#power-scales), [log](#log-scales), [identity](#identity-scales), [time](#time-scales) or [sequential color](#sequential-scales) scale.
 
@@ -246,13 +246,13 @@ tickFormat(-0.5); // "-50%"
 
 If *specifier* uses the format type `s`, the scale will return a [SI-prefix format](https://github.com/d3/d3-format#locale_formatPrefix) based on the larger absolute value of *start* and *stop*. If the *specifier* already specifies a precision, this method is equivalent to [*locale*.format](https://github.com/d3/d3-format#locale_format).
 
-#### Linear Scales
+#### 线性缩放(Linear Scales)
 
 <a name="scaleLinear" href="#scaleLinear">#</a> d3.<b>scaleLinear</b>([[<i>domain</i>, ]<i>range</i>]) [<>](https://github.com/d3/d3-scale/blob/master/src/linear.js "Source")
 
 Constructs a new [continuous scale](#continuous-scales) with the specified [domain](#continuous_domain) and [range](#continuous_range), the [default](https://github.com/d3/d3-interpolate#interpolate) [interpolator](#continuous_interpolate) and [clamping](#continuous_clamp) disabled. If either *domain* or *range* are not specified, each defaults to [0, 1]. Linear scales are a good default choice for continuous quantitative data because they preserve proportional differences. Each range value *y* can be expressed as a function of the domain value *x*: *y* = *mx* + *b*.
 
-#### Power Scales
+#### 指数(n次方/幂运算)缩放(Power Scales)
 
 Power scales are similar to [linear scales](#linear-scales), except an exponential transform is applied to the input domain value before the output range value is computed. Each range value *y* can be expressed as a function of the domain value *x*: *y* = *mx^k* + *b*, where *k* is the [exponent](#pow_exponent) value. Power scales also support negative domain values, in which case the input value and the resulting output value are multiplied by -1.
 
@@ -312,7 +312,7 @@ See [*continuous*.copy](#continuous_copy).
 
 Constructs a new [continuous](#continuous-scales) [power scale](#power-scales) with the specified [domain](#continuous_domain) and [range](#continuous_range), the [exponent](#pow_exponent) 0.5, the [default](https://github.com/d3/d3-interpolate#interpolate) [interpolator](#continuous_interpolate) and [clamping](#continuous_clamp) disabled. If either *domain* or *range* are not specified, each defaults to [0, 1]. This is a convenience method equivalent to `d3.scalePow(…).exponent(0.5)`.
 
-#### Log Scales
+#### 对数缩放(Log Scales)
 
 Log scales are similar to [linear scales](#linear-scales), except a logarithmic transform is applied to the input domain value before the output range value is computed. The mapping to the range value *y* can be expressed as a function of the domain value *x*: *y* = *m* log(<i>x</i>) + *b*.
 
@@ -382,7 +382,7 @@ Constructs a new [continuous scale](#continuous-scales) with the specified [doma
 
 If *constant* is specified, sets the symlog constant to the specified number and returns this scale; otherwise returns the current value of the symlog constant, which defaults to 1. See “A bi-symmetric log transformation for wide-range data” by Webber for more.
 
-#### Identity Scales
+#### 无限♾缩放(Identity Scales)
 
 Identity scales are a special case of [linear scales](#linear-scales) where the domain and range are identical; the scale and its invert method are thus the identity function. These scales are occasionally useful when working with pixel coordinates, say in conjunction with an axis or brush. Identity scales do not support [rangeRound](#continuous_rangeRound), [clamp](#continuous_clamp) or [interpolate](#continuous_interpolate).
 
@@ -390,7 +390,7 @@ Identity scales are a special case of [linear scales](#linear-scales) where the 
 
 Constructs a new identity scale with the specified [domain](#continuous_domain) and [range](#continuous_range). If *range* is not specified, it defaults to [0, 1].
 
-#### Time Scales
+#### 时间缩放(Time Scales)
 
 Time scales are a variant of [linear scales](#linear-scales) that have a temporal domain: domain values are coerced to [dates](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date) rather than numbers, and [invert](#continuous_invert) likewise returns a date. Time scales implement [ticks](#time_ticks) based on [calendar intervals](https://github.com/d3/d3-time), taking the pain out of generating axes for temporal domains.
 
@@ -530,7 +530,7 @@ Nicing is useful if the domain is computed from data, say using [extent](https:/
 
 Equivalent to [time](#time), but the returned time scale operates in [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) rather than local time.
 
-### Sequential Scales
+### 顺序刻度(Sequential Scales)
 
 Sequential scales, like [diverging scales](#diverging-scales), are similar to [continuous scales](#continuous-scales) in that they map a continuous, numeric input domain to a continuous output range. However, unlike continuous scales, the output range of a sequential scale is fixed by its interpolator and not configurable. These scales do not expose [invert](#continuous_invert), [range](#continuous_range), [rangeRound](#continuous_rangeRound) and [interpolate](#continuous_interpolate) methods.
 
@@ -590,7 +590,7 @@ A [sequential scale](#sequential-scales) with a symmetric logarithmic transform,
 
 A [sequential scale](#sequential-scales) using a *p*-quantile transform, analagous to a [quantile scale](#quantile-scales).
 
-### Diverging Scales
+### 发散缩放 (Diverging Scales)
 
 Diverging scales, like [sequential scales](#sequential-scales), are similar to [continuous scales](#continuous-scales) in that they map a continuous, numeric input domain to a continuous output range. However, unlike continuous scales, the output range of a diverging scale is fixed by its interpolator and not configurable. These scales do not expose [invert](#continuous_invert), [range](#continuous_range), [rangeRound](#continuous_rangeRound) and [interpolate](#continuous_interpolate) methods.
 
@@ -711,7 +711,7 @@ Returns the array of computed thresholds within the [domain](#quantize_domain).
 
 Returns an exact copy of this scale. Changes to this scale will not affect the returned scale, and vice versa.
 
-### Quantile Scales
+### 数量刻度(Quantile Scales)
 
 Quantile scales map a sampled input domain to a discrete range. The domain is considered continuous and thus the scale will accept any reasonable input value; however, the domain is specified as a discrete set of sample values. The number of values in (the cardinality of) the output range determines the number of quantiles that will be computed from the domain. To compute the quantiles, the domain is sorted, and treated as a [population of discrete values](https://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population); see d3-array’s [quantile](https://github.com/d3/d3-array#quantile). See [bl.ocks.org/8ca036b3505121279daf](http://bl.ocks.org/mbostock/8ca036b3505121279daf) for an example.
 
@@ -743,7 +743,7 @@ Returns the quantile thresholds. If the [range](#quantile_range) contains *n* di
 
 Returns an exact copy of this scale. Changes to this scale will not affect the returned scale, and vice versa.
 
-### Threshold Scales
+### 阈值刻度 (Threshold Scales)
 
 Threshold scales are similar to [quantize scales](#quantize-scales), except they allow you to map arbitrary subsets of the domain to discrete values in the range. The input domain is still continuous, and divided into slices based on a set of threshold values. See [bl.ocks.org/3306362](http://bl.ocks.org/mbostock/3306362) for an example.
 
@@ -793,7 +793,7 @@ If *range* is specified, sets the scale’s range to the specified array of valu
 
 Returns an exact copy of this scale. Changes to this scale will not affect the returned scale, and vice versa.
 
-### Ordinal Scales
+### 序数刻度(Ordinal Scales)
 
 Unlike [continuous scales](#continuous-scales), ordinal scales have a discrete domain and range. For example, an ordinal scale might map a set of named categories to a set of colors, or determine the horizontal positions of columns in a column chart.
 
@@ -827,7 +827,7 @@ Returns an exact copy of this ordinal scale. Changes to this scale will not affe
 
 A special value for [*ordinal*.unknown](#ordinal_unknown) that enables implicit domain construction: unknown values are implicitly added to the domain.
 
-#### Band Scales
+#### 带刻度(Band Scales)
 
 Band scales are like [ordinal scales](#ordinal-scales) except the output range is continuous and numeric. Discrete output values are automatically computed by the scale by dividing the continuous range into uniform bands. Band scales are typically used for bar charts with an ordinal or categorical dimension. The [unknown value](#ordinal_unknown) of a band scale is effectively undefined: they do not allow implicit domain construction.
 
@@ -893,7 +893,7 @@ Returns the distance between the starts of adjacent bands.
 
 Returns an exact copy of this scale. Changes to this scale will not affect the returned scale, and vice versa.
 
-#### Point Scales
+#### 点刻度(Point Scales)
 
 Point scales are a variant of [band scales](#band-scales) with the bandwidth fixed to zero. Point scales are typically used for scatterplots with an ordinal or categorical dimension. The [unknown value](#ordinal_unknown) of a point scale is always undefined: they do not allow implicit domain construction.
 
